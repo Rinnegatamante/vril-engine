@@ -49,7 +49,7 @@ extern int lanConfig_cursor;
 int isKeyboard;
 extern uint64_t rumble_tick;
 extern cvar_t psvita_touchmode;
-cvar_t vid_vsync;
+cvar_t vid_vsync = {"vid_vsync", "1", true};
 extern int scr_width;
 extern int scr_height;
 int cfg_width;
@@ -646,6 +646,7 @@ int quake_main (unsigned int argc, void* argv){
 	hostInitialized = 1;
 	
 	// Setting PSN Account if it's his first time
+	printf("Setting player name\n");
 	if (!strcmp(cl_name.string, "player"))
 	{
 		char nickname[32];
@@ -656,7 +657,9 @@ int quake_main (unsigned int argc, void* argv){
 		Cbuf_AddText(cmd);
 	}
 
+	printf("Input reset\n");
 	IN_ResetInputs();
+	printf("exec config.cfg\n");
 	Cbuf_AddText("exec config.cfg\n");
 
 	vglWaitVblankStart(vid_vsync.value);
@@ -668,6 +671,7 @@ int quake_main (unsigned int argc, void* argv){
 	// Disabling all FPU exceptions traps on main thread
 	sceKernelChangeThreadVfpException(0x0800009FU, 0x0);
 
+	printf("Entering main loop\n");
 	while (1)
 	{
 		// Changing V-Sync setting in realtime
