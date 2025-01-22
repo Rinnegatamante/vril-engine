@@ -8,3 +8,5 @@ PARAM.SFO
 EBOOT.PBP
 EBOOT2000.PBP
 *.DS_Store
+*.vpk
+*.velf

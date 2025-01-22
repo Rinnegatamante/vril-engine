@@ -19,6 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 // mathlib.c -- math primitives
 
+#define _GNU_SOURCE
 #include <math.h>
 #include "quakedef.h"
 
@@ -78,7 +79,7 @@ SinCos
 void SinCos( float radians, float *sine, float *cosine )
 {
 #ifndef __PSP__
-	sincos(radians, sine, cosine);
+	sincosf(radians, sine, cosine);
 #else
 
 #ifdef PSP_VFPU

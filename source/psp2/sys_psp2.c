@@ -262,7 +262,7 @@ void Sys_Error(char *error, ...)
 
 void Sys_Printf(char *fmt, ...)
 {
-#ifdef DEBUG
+	
 	if (hostInitialized)
 		return;
 
@@ -271,8 +271,7 @@ void Sys_Printf(char *fmt, ...)
 	va_start(argptr, fmt);
 	vsnprintf(buf, sizeof(buf), fmt, argptr);
 	va_end(argptr);
-	Log(buf);
-#endif
+	sceClibPrintf("%s\n", buf);
 
 }
 
@@ -433,7 +432,7 @@ int quake_main (unsigned int argc, void* argv){
 	// cl_efrags = malloc(sizeof(efrag_t) * MAX_EFRAGS);
 
 	// Checking for uma0 support
-	FILE *f = fopen("uma0:/data/Quake/id1/pak0.pak", "rb");
+	FILE *f = fopen("uma0:/data/nzp/nzp/pak0.pak", "rb");
 	if (f) {
 		fclose(f);
 		is_uma0 = 1;
@@ -460,14 +459,14 @@ int quake_main (unsigned int argc, void* argv){
 	static quakeparms_t    parms;
 	
 	// Loading resolution and MSAA mode from config files, those are not handled via Host cause Host_Init requires vitaGL to be working
-	if (is_uma0) f = fopen("uma0:data/Quake/resolution.cfg", "rb");
-	else f = fopen("ux0:data/Quake/resolution.cfg", "rb");
+	if (is_uma0) f = fopen("uma0:data/nzp/resolution.cfg", "rb");
+	else f = fopen("ux0:data/nzp/resolution.cfg", "rb");
 	if (f != NULL){
 		fscanf(f, "%dx%d", &scr_width, &scr_height);
 		fclose(f);
 	}
-	if (is_uma0) f = fopen("uma0:data/Quake/antialiasing.cfg", "rb");
-	else f = fopen("ux0:data/Quake/antialiasing.cfg", "rb");
+	if (is_uma0) f = fopen("uma0:data/nzp/antialiasing.cfg", "rb");
+	else f = fopen("ux0:data/nzp/antialiasing.cfg", "rb");
 	if (f != NULL){
 		fscanf(f, "%d", &antialiasing);
 		fclose(f);
@@ -572,8 +571,8 @@ int quake_main (unsigned int argc, void* argv){
 		}
 	} else COM_InitArgv(argc, argv);
 	
-	if (is_uma0) parms.basedir = "uma0:/data/Quake";
-	else parms.basedir = "ux0:/data/Quake";
+	if (is_uma0) parms.basedir = "uma0:/data/nzp";
+	else parms.basedir = "ux0:/data/nzp";
 	
 	// Initializing empty ModList
 	//mods = NULL;
