@@ -27,6 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define PLATFORM_DIR ctr
 #elif __vita__
 #define PLATFORM_DIR psp2
+#include "psp2/neon_mathfun.h"
 #else
 #error "Unknown platform"
 #endif
@@ -446,9 +447,44 @@ extern float gTexCoordBuffer[VERTEXARRAYSIZE];
 #endif // _3DS
 
 #ifdef __vita__
+#include "psp2/image.h"
+
 extern float *gVertexBuffer;
 extern float *gColorBuffer;
 extern float *gTexCoordBuffer;
+
+void DrawQuad_NoTex(GLfloat x, GLfloat y, GLfloat w, GLfloat h, GLfloat r, GLfloat g, GLfloat b, GLfloat a);
+void DrawQuad(GLfloat x, GLfloat y, GLfloat w, GLfloat h, GLfloat u, GLfloat v, GLfloat uw, GLfloat vh);
+
+void GL_SubdivideSurface (msurface_t *fa);
+void GL_MakeAliasModelDisplayLists (model_t *m, aliashdr_t *hdr);
+int R_LightPoint (vec3_t p);
+void R_DrawBrushModel (entity_t *e);
+void RotatePointAroundVector( vec3_t dst, const vec3_t dir, const vec3_t point, float degrees );
+void R_AnimateLight (void);
+void V_CalcBlend (void);
+void R_DrawWorld (void);
+void R_RenderDlights(void);
+void R_DrawParticles (void);
+void R_DrawWaterSurfaces (void);
+void R_RenderBrushPoly (msurface_t *fa);
+void R_InitParticles (void);
+void GL_Upload8_EXT (byte *data, int width, int height,  bool mipmap, bool alpha);
+void R_ClearParticles (void);
+void GL_BuildLightmaps (void);
+void EmitWaterPolys (msurface_t *fa);
+void EmitSkyPolys (msurface_t *fa);
+void EmitBothSkyLayers (msurface_t *fa);
+void R_DrawSkyChain (msurface_t *s);
+bool R_CullBox (vec3_t mins, vec3_t maxs);
+void R_MarkLights (dlight_t *light, int bit, mnode_t *node);
+void R_RotateForEntity (entity_t *e);
+void R_StoreEfrags (efrag_t **ppefrag);
+void GL_Set2D (void);
+void GL_DrawFPS(void);
+void GL_DrawBenchmark(void);
+void GL_SelectTexture (GLenum target);
+void Q_strncpyz (char *dest, char *src, size_t size);
 #endif // __vita__
 
 #undef PLATFORM_DIR

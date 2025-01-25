@@ -322,7 +322,7 @@ int ReSendMessage (qsocket_t *sock)
 }
 
 
-bool Datagram_CanSendMessage (qsocket_t *sock)
+qboolean Datagram_CanSendMessage (qsocket_t *sock)
 {
 	if (sock->sendNext)
 		SendMessageNext (sock);
@@ -331,7 +331,7 @@ bool Datagram_CanSendMessage (qsocket_t *sock)
 }
 
 
-bool Datagram_CanSendUnreliableMessage (qsocket_t *sock)
+qboolean Datagram_CanSendUnreliableMessage (qsocket_t *sock)
 {
 	return true;
 }
@@ -888,7 +888,7 @@ void Datagram_Close (qsocket_t *sock)
 }
 
 
-void Datagram_Listen (bool state)
+void Datagram_Listen (qboolean state)
 {
 	int i;
 
@@ -1173,7 +1173,7 @@ qsocket_t *Datagram_CheckNewConnections (void)
 }
 
 
-static void _Datagram_SearchForHosts (bool xmit)
+static void _Datagram_SearchForHosts (qboolean xmit)
 {
 	int		ret;
 	int		n;
@@ -1272,7 +1272,7 @@ static void _Datagram_SearchForHosts (bool xmit)
 	}
 }
 
-void Datagram_SearchForHosts (bool xmit)
+void Datagram_SearchForHosts (qboolean xmit)
 {
 	for (net_landriverlevel = 0; net_landriverlevel < net_numlandrivers; net_landriverlevel++)
 	{

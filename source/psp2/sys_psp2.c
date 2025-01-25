@@ -37,6 +37,9 @@ uint8_t proto_idx;
 extern int gl_ssaa;
 extern int m_state;
 
+extern void IN_ResetInputs(void);
+extern void IN_StopRumble (void);
+
 // Running a dedicated server?
 qboolean isDedicated = false;
 
@@ -669,7 +672,7 @@ int quake_main (unsigned int argc, void* argv){
 	sceRtcGetCurrentTick(&lastTick);
 	
 	// Disabling all FPU exceptions traps on main thread
-	sceKernelChangeThreadVfpException(0x0800009FU, 0x0);
+	//sceKernelChangeThreadVfpException(0x0800009FU, 0x0);
 
 	printf("Entering main loop\n");
 	while (1)

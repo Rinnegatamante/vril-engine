@@ -25,6 +25,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../../quakedef.h"
 #include "gl_fullbright.h"
 
+extern void WAD3_LoadTextureWadFile (char *filename);
+extern byte *WAD3_LoadTexture(miptex_t *mt);
+
 model_t	*loadmodel;
 char	loadname[32];	// for hunk tags
 char fbr_mask_name[64]; // for fullbrights

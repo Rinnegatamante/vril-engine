@@ -1410,7 +1410,6 @@ void Batch_Character (int x, int y, int num) {
 		is_batching = 1;
 		batched_vbuffer = gVertexBuffer;
 		batched_tbuffer = gTexCoordBuffer;
-		batched_vertices = 0;
 	}
 
 	int				row, col;
@@ -1457,7 +1456,6 @@ void Batch_String (int x, int y, const char *str, int delta) {
 		is_batching = 1;
 		batched_vbuffer = gVertexBuffer;
 		batched_tbuffer = gTexCoordBuffer;
-		batched_vertices = 0;
 	}
 	
 	while (*str)
@@ -1505,6 +1503,7 @@ Draw_Batched
 */
 void Draw_Batched() {
 	if (batched_vertices > 0) {
+		batched_vertices = 0;
 		GL_Bind (char_texture);
 		vglVertexAttribPointerMapped(0, batched_vbuffer);
 		vglVertexAttribPointerMapped(1, batched_tbuffer);
